@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparador de PDFs</title>
+  <link rel="stylesheet" href="ui/styles/main.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>📄 Comparador de PDFs</h1>
+      <p class="subtitle">Encuentra diferencias entre dos versiones de un documento</p>
+    </header>
+
+    <main class="main">
+      <!-- Upload -->
+      <section class="upload-section" id="uploadSection">
+        <div class="upload-grid">
+          <div class="upload-box">
+            <label>PDF Original</label>
+            <div class="drop-zone" id="dropA" data-target="fileA">
+              <input type="file" id="fileA" accept=".pdf" hidden>
+              <div class="drop-content">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <p>Arrastra aquí o haz click</p>
+                <span class="filename" id="nameA"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="upload-box">
+            <label>PDF Modificado</label>
+            <div class="drop-zone" id="dropB" data-target="fileB">
+              <input type="file" id="fileB" accept=".pdf" hidden>
+              <div class="drop-content">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <p>Arrastra aquí o haz click</p>
+                <span class="filename" id="nameB"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btnCompare" disabled>
+          <span id="btnText">Comparar</span>
+          <span id="btnLoading" hidden>
+            <svg class="spinner" viewBox="0 0 24 24">
+              <circle class="spinner-circle" cx="12" cy="12" r="10" stroke-width="3" fill="none"/>
+            </svg>
+            Procesando...
+          </span>
+        </button>
+      </section>
+
+      <!-- Results -->
+      <section class="results" id="results" hidden>
+        <div class="results-header">
+          <h2>Resultados</h2>
+          <div class="summary" id="summary"></div>
+        </div>
+
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all">
+            Todas <span class="badge" id="badgeAll">0</span>
+          </button>
+          <button class="filter" data-filter="CHANGED">
+            🟡 Modificadas <span class="badge" id="badgeChanged">0</span>
+          </button>
+          <button class="filter" data-filter="ADDED">
+            🟢 Agregadas <span class="badge" id="badgeAdded">0</span>
+          </button>
+          <button class="filter" data-filter="REMOVED">
+            🔴 Removidas <span class="badge" id="badgeRemoved">0</span>
+          </button>
+        </div>
+
+        <div class="diff-list" id="list"></div>
+
+        <div class="actions">
+          <button class="btn-secondary" id="btnHTML">Exportar HTML</button>
+          <button class="btn-secondary" id="btnJSON">Exportar JSON</button>
+          <button class="btn-secondary" id="btnReset">Nueva Comparación</button>
+        </div>
+      </section>
+
+      <!-- Error -->
+      <section class="error" id="error" hidden>
+        <div class="error-box">
+          <h3>Error</h3>
+          <p id="errorMsg"></p>
+          <button class="btn-secondary" id="btnDismiss">Cerrar</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>PDF Comparador v1.2</p>
+    </footer>
+  </div>
+
+  <script type="module" src="ui/app.js"></script>
+</body>
+</html>
